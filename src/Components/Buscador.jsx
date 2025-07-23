@@ -1,12 +1,16 @@
 import { Form } from 'react-bootstrap';
-import { useState } from 'react';
-
+import { useContext, useState } from 'react';
 const Buscador = ({ personaje, setPersonajes }) => {
-    const [copia] = useState([...personaje])
 
+    const [copia] = useState([...personaje])
     const encontrar = (e) => {
         e.preventDefault()
-        setPersonajes(copia.filter(item => item.name.toLowerCase().includes(e.target.value.toLowerCase())))
+        if (e.target.value == '') {
+            setPersonajes(personaje)
+        } else {
+            let nuevo = copia.filter(item => item.name.includes(e.target.value))
+            setPersonajes(nuevo)
+        }
     }
     return (
         <>
