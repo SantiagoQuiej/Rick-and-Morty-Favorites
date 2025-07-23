@@ -1,12 +1,12 @@
-import { useContext } from 'react';
 import { Form } from 'react-bootstrap';
-import { usercontext } from '../Context/FavoritesContext';
+import { useState } from 'react';
 
-const Buscador = () => {
-    const { buscador, setPersonajes } = useContext(usercontext)
+const Buscador = ({ personaje, setPersonajes }) => {
+    const [copia] = useState([...personaje])
+
     const encontrar = (e) => {
         e.preventDefault()
-        setPersonajes(buscador.filter(item => item.name.toLowerCase().startsWith(e.target.value.toLowerCase())))
+        setPersonajes(copia.filter(item => item.name.toLowerCase().includes(e.target.value.toLowerCase())))
     }
     return (
         <>
